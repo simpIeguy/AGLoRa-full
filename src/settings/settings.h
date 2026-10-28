@@ -1,16 +1,4 @@
 /*
-Project AGLoRa (abbreviation of Arduino + GPS + LoRa)
-Tiny and chip LoRa GPS tracker
-
-Copyright © 2021-2025 Eugeny Shlyagin. Contacts: <shlyagin@gmail.com>
-License: http://opensource.org/licenses/MIT
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 Modules used:
 - Arduino UNO/Nano (ATMEGA328P, not ATmega168)
 - GPS NMEA Module (Generic)
