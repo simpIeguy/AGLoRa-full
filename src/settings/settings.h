@@ -122,11 +122,11 @@ The libraries will be installed automatically.
 
 // ========== NAME =======================
 #define NAME_LENGTH 12             // The same value for all devices
-const char NAME[NAME_LENGTH] = "Stan";               // Name of current tracker, NAME_LENGTH characters
+const char NAME[NAME_LENGTH] = "Tracker1";           // Name of current tracker, NAME_LENGTH characters
 // Example:
 // #define NAME = "Morty"; // All names length should be no longer than NAME_LENGTH
 
-#define BLE_NAME "AGLoRa-Stan"
+#define BLE_NAME "AGLoRa-Tracker1"
 // ========== WIRING =====================
 
 #if defined(ARDUINO_AVR_EBYTE_E32) || defined(ARDUINO_AVR_EBYTE_E220) || defined(ARDUINO_AVR_EBYTE_E22) 
@@ -362,6 +362,8 @@ String sendBatteryToPhone();
 
 #define MESH_MODE true  // "true" by default
 #define TTL 3  // Data packet lifetime (for transfer between devices)
+#define MESH_RESEND_MAX_DELAY 2000  // milliseconds, random pause before resending
+// so that trackers that received the same packet don't resend it at the same moment
 // ============ BLE SETTINGS ==========
 #define USE_BLE true  // use BLE output
 #define USE_BLE_MTU true // split data by MTU
@@ -369,7 +371,11 @@ String sendBatteryToPhone();
 // ============ SRAM STORAGE ==============
 // Maximum number of track points (struct DATA) in memory
 // Change and check free memory in "Output" after pressing "Verify".
-#define SRAM_STORAGE_SIZE 15    // DATA array size
+#ifdef ARDUINO_ARCH_AVR
+  #define SRAM_STORAGE_SIZE 15    // DATA array size
+#else
+  #define SRAM_STORAGE_SIZE 100   // ESP32 has much more SRAM
+#endif
 // not used if USE_EEPROM_MEMORY true, may be zero in this case
 // NOTE: Don't use all free memory! It's may broke BLE output. 
 // You should hold free memory for return String from "sendToPhone"

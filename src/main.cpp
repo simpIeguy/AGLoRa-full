@@ -101,6 +101,9 @@ AGLORA aglora(&memory, &ble);
 void setup()
 {
   Serial.begin(9600);
+  #ifdef ARDUINO_ARCH_AVR
+    randomSeed(analogRead(A0)); // ESP32 uses a hardware random generator, no seed needed
+  #endif
   aglora.hello(); // Beautifully print Hello from AGloRa :-)
   // Start modules
   gps.setup();    // GPS
@@ -189,6 +192,7 @@ void processNewData(LORADATA *loraDataPackage)
         if (--ttl > 0)
         {
           loraDataPackage->ttl = ttl;
+          delay(random(MESH_RESEND_MAX_DELAY)); // avoid collisions with other resending trackers
           lora.send(loraDataPackage);
         }
     #endif
