@@ -51,6 +51,7 @@ public:
   void printPackage(LORADATA * loraDataPacket);
   void getRequest(String request);
   void sendPackageToBLE(DATA * trackerData, int index);
+  void sendMyPackageToBLE(DATA * trackerData);
 
 private:
   IMemory * _memory;

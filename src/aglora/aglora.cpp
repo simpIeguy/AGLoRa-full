@@ -208,6 +208,26 @@ void AGLORA::sendPackageToBLE(DATA *trackerData, int index)
   _ble->send(&response);
 }
 
+// Own location goes to the app too, but not to memory: same "point" message
+// without &index and &crc, because there is no memory cell behind it
+void AGLORA::sendMyPackageToBLE(DATA *trackerData)
+{
+  String response = bleProtocolPrefix +
+                    bleProtocolTypePoint +
+                    bleProtocolVersion;
+
+  response += sendToPhone(trackerData);
+  response += sendBatteryToPhone();
+  response += bleProtocolDivider;
+
+  #if DEBUG_MODE && DEBUG_AGLORA
+    Serial.print(F("🟢AGLoRa: send my point 📦 to BLE → "));
+    Serial.print(response);
+  #endif
+
+  _ble->send(&response);
+}
+
 void AGLORA::sendAllPackagesToBLE()
 {
   unsigned int maxIndex = _memory->getStorageOverwrite() ? _memory->getSize() : _memory->getIndex();

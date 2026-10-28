@@ -133,6 +133,10 @@ void loop()
         aglora.printPackage(&loraDataPackage);
 
         lora.send(&loraDataPackage); // send location to other trackers
+
+        #if USE_BLE
+            aglora.sendMyPackageToBLE(&loraDataPackage.data); // and to the app, without saving
+        #endif
     #endif
 
     _timeToSendMyLocation += DATA_SENDING_INTERVAL;
