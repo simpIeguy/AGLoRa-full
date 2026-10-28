@@ -163,6 +163,9 @@ const char NAME[NAME_LENGTH] = "Tracker1";           // Name of current tracker,
   #define LORA_PIN_AX 8   // GPIO8 or D8
   #define LORA_START_SPEED 9600
   //#define E32_TTL_1W // define for 1W modules
+  // For 1W modules E32_TTL_1W is set in platformio.ini build_flags (it must be defined before LoRa_E32.h).
+  // 1W module: POWER_21 (~125 mW, indoor tests) / POWER_24 / POWER_27 / POWER_30 (1 W)
+  #define LORA_TRANSMISSION_POWER POWER_21
 
   //UART GPS ->  ESP32C3 SEED XIAO
   #define GPS_PIN_RX 5  // GPIO4 or D2

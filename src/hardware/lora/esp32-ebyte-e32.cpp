@@ -51,7 +51,11 @@ void LORA::setup()
     configuration.OPTION.fixedTransmission = FT_TRANSPARENT_TRANSMISSION;  // FT_TRANSPARENT_TRANSMISSION (default) / FT_FIXED_TRANSMISSION
     configuration.OPTION.ioDriveMode = IO_D_MODE_PUSH_PULLS_PULL_UPS;      // IO_D_MODE_OPEN_COLLECTOR / IO_D_MODE_PUSH_PULLS_PULL_UPS
 
+#ifdef LORA_TRANSMISSION_POWER
+    configuration.OPTION.transmissionPower = LORA_TRANSMISSION_POWER;      // set in settings.h
+#else
     configuration.OPTION.transmissionPower = POWER_20;                     // 21/24/27/30 dBm if define E32_TTL_1W
+#endif
     // If you see the error "POWER_21 was not declared in this scope", ENABLE the #define E32_TTL_1W.
 
 
