@@ -63,7 +63,7 @@ void AGLORA::hello()
 /// @param loraDataPacket
 void AGLORA::clearDataPacket(DATA *trackerData)
 {
-  memset(trackerData, 0, sizeof(&trackerData));
+  memset(trackerData, 0, sizeof(*trackerData));
   strcpy(trackerData->name, NAME);
   #if DEBUG_MODE && DEBUG_AGLORA
     Serial.println(F("🟢[AGLoRa: time to send your location📍, new loraDataPacket prepared 📦]"));

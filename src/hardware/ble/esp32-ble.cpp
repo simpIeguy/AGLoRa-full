@@ -31,7 +31,10 @@ uint8_t value = 0;
 
 String package = "";
 
-String receivedPackage = "";
+// onWrite() runs in the BLE task, read() runs in loop(): share a fixed buffer under a lock
+#define RECEIVED_PACKAGE_SIZE 64
+char receivedPackage[RECEIVED_PACKAGE_SIZE] = "";
+portMUX_TYPE receivedPackageMux = portMUX_INITIALIZER_UNLOCKED;
 
 // #define SERVICE_UUID "0000ffe0-1cda-43b5-984e-61077683f0ab"
 // #define CHARACTERISTIC_UUID "0000ffe1-48ea-47d8-af50-100b9134387d"
@@ -68,13 +71,16 @@ class MyBLECallbacks : public BLECharacteristicCallbacks
 {
   void onWrite(BLECharacteristic *pCharacteristic)
   {
-    receivedPackage = "";
     std::string rxValue = pCharacteristic->getValue();
-    receivedPackage = std::string(rxValue.c_str()).c_str(); // Преобразование std::string в String
+
+    portENTER_CRITICAL(&receivedPackageMux);
+    strncpy(receivedPackage, rxValue.c_str(), RECEIVED_PACKAGE_SIZE - 1);
+    receivedPackage[RECEIVED_PACKAGE_SIZE - 1] = '\0';
+    portEXIT_CRITICAL(&receivedPackageMux);
 
     #if DEBUG_MODE && DEBUG_BLE
     Serial.print(F("📲 BLE: 📫 Received: "));
-    Serial.println(receivedPackage);
+    Serial.println(rxValue.c_str());
     #endif
 
   }
@@ -99,13 +105,15 @@ void BLE::setup()
 
 String BLE::read()
 {
-    String result = "";
+    char buffer[RECEIVED_PACKAGE_SIZE];
 
-    if(receivedPackage != ""){
-        result = receivedPackage;
-        result.trim();
-        receivedPackage = "";
-    }
+    portENTER_CRITICAL(&receivedPackageMux);
+    strcpy(buffer, receivedPackage);
+    receivedPackage[0] = '\0';
+    portEXIT_CRITICAL(&receivedPackageMux);
+
+    String result = buffer;
+    result.trim();
 
     return result;
 }
