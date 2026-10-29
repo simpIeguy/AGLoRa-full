@@ -110,11 +110,11 @@ The libraries will be installed automatically.
 
 // ========== NAME =======================
 #define NAME_LENGTH 12             // The same value for all devices
-const char NAME[NAME_LENGTH] = "Tracker1";           // Name of current tracker, NAME_LENGTH characters
+const char NAME[NAME_LENGTH] = "UAV1";           // Name of current tracker, NAME_LENGTH characters
 // Example:
 // #define NAME = "Morty"; // All names length should be no longer than NAME_LENGTH
 
-#define BLE_NAME "AGLoRa-Tracker1"
+#define BLE_NAME "UAV1"
 // ========== WIRING =====================
 
 #if defined(ARDUINO_AVR_EBYTE_E32) || defined(ARDUINO_AVR_EBYTE_E220) || defined(ARDUINO_AVR_EBYTE_E22) 
