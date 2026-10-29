@@ -5,10 +5,7 @@ This is a function that sends data to the app.
 Data packets are sent using OsmAnd-like protocol:
 id=name&lat={0}&lon={1}&timestamp={2}&speed={3}&altitude={4}
 
-
-For the LoRa Radar app (https://github.com/Udj13/AGLoRa/wiki/Lora-Radar-app), 
-you can use short parameter variants. For a full description, refer to the documentation:
-https://github.com/Udj13/AGLoRa/wiki/AGLoRa-BLE-protocol
+The message framing and fields are shared with the app (client-app/lib/protocol).
 */
 String sendToPhone(DATA *package) {
 
@@ -73,7 +70,7 @@ String sendBatteryToPhone() {
   String result;
   
   result += "&dev_bat=";
-  //result += "&db=";   // short version example (Lora Radar app only)
+  //result += "&db=";   // short version example
   result += 100; // not implemented: hardcoded 100
 
   return result;

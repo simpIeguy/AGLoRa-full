@@ -63,10 +63,7 @@ The configuration connects the required library.
 The libraries will be installed automatically.
 */
 
-// Here are the libraries that I used in this project, thanks to their authors!
-// Please, give him a donation if you also think he did a great job!
-// https://github.com/xreef | https://mischianti.org/
-// https://github.com/jgromes
+// LoRa module libraries (installed by PlatformIO), docs links below
 #ifdef ARDUINO_AVR_EBYTE_E32 
   #include "LoRa_E32.h"      
   // Docs: https://github.com/xreef/EByte_LoRa_E220_Series_Library

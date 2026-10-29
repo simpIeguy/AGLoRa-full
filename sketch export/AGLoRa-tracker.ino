@@ -1,11 +1,6 @@
 /*
-Project AGLoRa (abbreviation of Arduino + GPS + LoRa)
-Tiny and chip LoRa GPS tracker
-
-https://github.com/Udj13/AGLoRa/
-
-Copyright © 2021-2024 Eugeny Shlyagin. Contacts: <shlyagin@gmail.com>
-License: http://opensource.org/licenses/MIT
+LoRa GPS tracker, single-file sketch for Arduino IDE (older version).
+The current firmware is the PlatformIO project in full-stack.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty.
@@ -44,10 +39,7 @@ NOTE: GPS is valid, if LED_BUILTIN is HIGH
 #define EBYTE_E220 // EBYTE_E220 or EBYTE_E32
 //#define EBYTE_E32 // EBYTE_E220 or EBYTE_E32
 
-// Here are the libraries that I used in this project, thanks to their author Renzo Mischianti!
-// Please, give him a donation if you also think he did a great job!
-// https://github.com/xreef
-// https://mischianti.org/
+// LoRa module libraries, docs links below
 
 #ifdef EBYTE_E32
 #include "LoRa_E32.h"
