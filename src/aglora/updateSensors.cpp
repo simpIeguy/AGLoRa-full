@@ -3,7 +3,7 @@
 /// Udpate sensors in loraDataPacket
 void AGLORA::updateSensors(DATA *loraDataPacket)
 {
-    loraDataPacket->battery = 100; // just for example
+    loraDataPacket->battery = 100; // not implemented: battery is not measured, hardcoded 100
 
 #if DEBUG_MODE && DEBUG_AGLORA
     Serial.print(F("🟢[AGLoRa sensors: "));

@@ -14,7 +14,7 @@ String sendToPhone(DATA *package) {
 
   String result;
   result += F("&dev_batt=");  //battery of your device
-  result += F("100"); //implement voltage acquisition
+  result += F("100"); // not implemented: hardcoded 100, no voltage measurement yet
 
   result += F("&name=");  //other tracker's name
   result += package->name;  //NAME_LENGTH bytes
@@ -74,7 +74,7 @@ String sendBatteryToPhone() {
   
   result += "&dev_bat=";
   //result += "&db=";   // short version example (Lora Radar app only)
-  result += 100;
+  result += 100; // not implemented: hardcoded 100
 
   return result;
 }
